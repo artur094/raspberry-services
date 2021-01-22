@@ -1,0 +1,9 @@
+deploy-portainer:
+    stage: deploy
+    tags:
+      - deploy
+      - raspberry
+    script:
+      - docker-compose up --build
+    only:
+      - master
