@@ -1,0 +1,43 @@
+version: "3.3"
+
+services:
+
+  gitlab:
+    image: 'ulm0/gitlab'
+#    restart: always
+    hostname: 'gitlab.morandizzi.freeddns.org'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.morandizzi.freeddns.org'
+        # Add any other gitlab.rb configuration here, each on its own line
+    volumes:
+      - '$GITLAB_HOME/config:/etc/gitlab'
+      - '$GITLAB_HOME/logs:/var/log/gitlab'
+      - '$GITLAB_HOME/data:/var/opt/gitlab'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gitlab.rule=Host(`gitlab.morandizzi.freeddns.org`)"
+      - "traefik.http.routers.gitlab.entrypoints=websecure"
+      - "traefik.http.routers.gitlab.service=gitlab"
+      - "traefik.http.services.gitlab.loadbalancer.server.port=80"
+      - "traefik.http.routers.gitlab.tls=true"
+      - "traefik.http.routers.gitlab.tls.certresolver=le"
+      - "traefik.http.routers.gitlab.tls.domains[0].main=gitlab.morandizzi.freeddns.org"
+
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.gitlab.middlewares=redirect-to-https@docker"
+
+      #- "traefik.http.middlewares.gitlabpathstrip.stripprefix.prefixes=/gitlab"
+      #- "traefik.http.routers.gitlab.middlewares=gitlabpathstrip@docker"
+      #- "traefik.http.routers.gitlab.middlewares=gitlab-redirectregex, gitlab-replacepathregex"
+
+      #- "traefik.http.middlewares.gitlab-replacepathregex.replacepathregex.regex=^/gitlab/(.*)"
+      #- "traefik.http.middlewares.gitlab-replacepathregex.replacepathregex.replacement=/$$1"
+      #- "traefik.http.middlewares.gitlab-redirectregex.redirectregex.regex=^(.*)/gitlab$$"
+      #- "traefik.http.middlewares.gitlab-redirectregex.redirectregex.replacement=$$1/gitlab/"
+
+      # registry
+      #- "traefik.http.routers.gitlab-registry.rule=PathPrefix(`/gitlab-registry`)"
+      #- "traefik.http.routers.gitlab-registry.entrypoints=web"
+      #- "traefik.http.routers.gitlab-registry.service=gitlab-registry"
+      #- "traefik.http.services.gitlab-registry.loadbalancer.server.port=5555"

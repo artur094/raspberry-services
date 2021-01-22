@@ -1,0 +1,43 @@
+version: "3.3"
+
+services:
+
+  traefik:
+    image: "traefik:latest"
+    container_name: "traefik"
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+      - "--entrypoints.websecure.address=:443"
+#      - "--certificatesResolvers.certresolver.acme.email=ivan.morandi94@gmail.com"
+#      - "--certificatesResolvers.certresolver.acme.storage=/traefik/acme.json"
+#      - "--certificatesResolvers.certresolver.acme.tlsChallenge=true"
+
+      - "--certificatesResolvers.le.acme.email=ivan.morandi94@gmail.com"
+      - "--certificatesResolvers.le.acme.storage=/traefik/acme.json"
+      - "--certificatesResolvers.le.acme.tlsChallenge=true"
+      - "--certificatesResolvers.le.acme.httpChallenge=true"
+      - "--certificatesResolvers.le.acme.httpChallenge.entryPoint=web"
+      - "--certificatesResolvers.le.acme.dnsChallenge=true"
+      - "--certificatesResolvers.le.acme.dnsChallenge.provider=dynu"
+
+#      - "--certificatesResolvers.le.acme.httpChallenge=true"
+      #- "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      #- "--certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      #- "--certificatesresolvers.myresolver.acme.email=ivan.morandi94@gmail.com"
+      #- "--certificatesresolvers.myresolver.acme.storage=/opt/traefik/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik:/traefik"
+    environment:
+      - DYNU_API_KEY=d5e523Yb45gV4TbdT4XX35WcU3b5V4a6
