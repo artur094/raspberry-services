@@ -1,1 +1,3 @@
 include:
+    - "traefik/.gitlab-ci.yml"
+    - "portainer/.gitlab-ci.yml"
