@@ -1,9 +1,8 @@
 deploy-portainer:
     stage: deploy
     tags:
-      - deploy
-      - raspberry
+      - rpi-deploy
     script:
-      - docker-compose up --build
+      - docker-compose -f portainer/docker-compose.yml up --build -d
     only:
       - master
