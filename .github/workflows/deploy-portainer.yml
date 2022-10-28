@@ -1,4 +1,4 @@
-name: Deploy Traefik Workflow
+name: Deploy Portainer Workflow
 
 on:
   workflow_dispatch:
