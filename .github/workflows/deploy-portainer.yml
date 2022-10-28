@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-traefik:
+  deploy-portainer:
     uses: artur094/workflows/.github/workflows/docker-deploy.yml@main
     with:
       LABELS: "['native', 'raspberry', 'deploy']"
