@@ -8,7 +8,7 @@ jobs:
     uses: artur094/workflows/.github/workflows/docker-deploy.yml@main
     with:
       LABELS: "['native', 'raspberry', 'deploy']"
-      DOCKER_COMPOSE_FILE: traefik/docker-compose.yml
+      DOCKER_COMPOSE_FILE: portainer/docker-compose.yml
       PROJECT_NAME: traefik
       ENVIRONMENT: production
       IMAGE_NAMES: "{}"
