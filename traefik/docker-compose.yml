@@ -41,7 +41,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "/var/traefik:/traefik"
     environment:
-      - DYNU_API_KEY=d5e523Yb45gV4TbdT4XX35WcU3b5V4a6
+      - DYNU_API_KEY=${DJANGO_SECRET_KEY}
 
 
 networks: 
