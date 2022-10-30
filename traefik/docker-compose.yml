@@ -18,7 +18,7 @@ services:
       - "traefik.http.routers.traefik.tls.certresolver=le"
       - "traefik.http.routers.traefik.tls.domains[0].main=traefik.morandizzi.com"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_USERS}"
+      - "traefik.http.middlewares.redirect-to-https.basicauth.users=${TRAEFIK_USERS}"
       - "traefik.http.routers.traefik.middlewares=redirect-to-https@docker"
     command:
       # Conf
@@ -40,7 +40,7 @@ services:
       - "--certificatesResolvers.le.acme.tlsChallenge=true"
       - "--certificatesResolvers.le.acme.httpChallenge=true"
       - "--certificatesResolvers.le.acme.httpChallenge.entryPoint=web"
-      - "--certificatesResolvers.le.acme.dnsChallenge=true"
+      - "--certificatesResolvers.le.acme.dnsCha llenge=true"
       - "--certificatesResolvers.le.acme.dnsChallenge.provider=dynu"
 
 #      - "--certificatesResolvers.le.acme.httpChallenge=true"
@@ -55,8 +55,6 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "/var/traefik:/traefik"
-    environment:
-      - DYNU_API_KEY=${DYNU_API_KEY}
 
 
 networks: 
