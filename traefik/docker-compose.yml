@@ -8,7 +8,6 @@ services:
     restart: unless-stopped
     command:
       # Frontend
-      - "traefik.docker.network=traefik-network"
       - "traefik.http.routers.traefik.rule=Host(`traefik.morandizzi.com`)"
       - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.traefik.tls=true"
