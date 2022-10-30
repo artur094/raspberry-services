@@ -55,6 +55,8 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "/var/traefik:/traefik"
+    environment:
+      - DYNU_API_KEY=${DYNU_API_KEY}
 
 
 networks: 
