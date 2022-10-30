@@ -6,8 +6,10 @@ services:
     image: "traefik:latest"
     container_name: "traefik"
     restart: unless-stopped
-    command:
+    labels:
       # Frontend
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-network"
       - "traefik.http.routers.traefik.rule=Host(`traefik.morandizzi.com`)"
       - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.traefik.tls=true"
@@ -16,7 +18,9 @@ services:
       - "traefik.http.routers.traefik.tls.certresolver=le"
       - "traefik.http.routers.traefik.tls.domains[0].main=traefik.morandizzi.com"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.routers.traefik.middlewares=redirect-to-https@docker"  
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_USERS}"
+      - "traefik.http.routers.traefik.middlewares=redirect-to-https@docker"
+    command:
       # Conf
       - "--log.level=DEBUG"
       - "--api.insecure=true"
