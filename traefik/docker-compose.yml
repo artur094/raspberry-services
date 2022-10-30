@@ -40,7 +40,7 @@ services:
       - "--certificatesResolvers.le.acme.tlsChallenge=true"
       - "--certificatesResolvers.le.acme.httpChallenge=true"
       - "--certificatesResolvers.le.acme.httpChallenge.entryPoint=web"
-      - "--certificatesResolvers.le.acme.dnsCha llenge=true"
+      - "--certificatesResolvers.le.acme.dnsChallenge=true"
       - "--certificatesResolvers.le.acme.dnsChallenge.provider=dynu"
 
 #      - "--certificatesResolvers.le.acme.httpChallenge=true"
