@@ -57,6 +57,7 @@ services:
       - "/var/traefik:/traefik"
     environment:
       - DYNU_API_KEY=${DYNU_API_KEY}
+      - TRAEFIK_USERS=${TRAEFIK_USERS}
 
 
 networks: 
