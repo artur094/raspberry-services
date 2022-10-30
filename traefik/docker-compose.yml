@@ -18,7 +18,7 @@ services:
       - "traefik.http.routers.traefik.tls.certresolver=le"
       - "traefik.http.routers.traefik.tls.domains[0].main=traefik.morandizzi.com"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_USERS}"
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=${{TRAEFIK_USERS}}"
       - "traefik.http.routers.traefik.middlewares=redirect-to-https@docker,traefik-auth@docker"
     command:
       # Conf
