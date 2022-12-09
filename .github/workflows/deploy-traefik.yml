@@ -7,7 +7,7 @@ jobs:
   deploy-traefik:
     uses: artur094/workflows/.github/workflows/docker-deploy.yml@main
     with:
-      LABELS: "['native', 'raspberry', 'deploy']"
+      LABELS: "['native', 'contabo', 'deploy']"
       DOCKER_COMPOSE_FILE: traefik/docker-compose.yml
       PROJECT_NAME: traefik
       ENVIRONMENT: production
