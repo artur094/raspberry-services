@@ -11,13 +11,13 @@ services:
     labels:
       # Frontend
       - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.morandizzi.freeddns.org`)"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.morandizzi.com`)"
       - "traefik.http.routers.portainer.entrypoints=websecure"
       - "traefik.http.routers.portainer.service=portainer"
       - "traefik.http.services.portainer.loadbalancer.server.port=9000"
       - "traefik.http.routers.portainer.tls=true"
       - "traefik.http.routers.portainer.tls.certresolver=le"
-      - "traefik.http.routers.portainer.tls.domains[0].main=portainer.morandizzi.freeddns.org"
+      - "traefik.http.routers.portainer.tls.domains[0].main=portainer.morandizzi.com"
       # Edge
       #- "traefik.http.routers.portainer-edge.rule=PathPrefix(`/portainer-edge`)"
       #- "traefik.http.routers.portainer-edge.entrypoints=web"
