@@ -2,12 +2,19 @@ name: Deploy Traefik Workflow
 
 on:
   workflow_dispatch:
+    inputs:
+      destination:
+        type: choice
+        description: "Where to deploy"
+        options:
+          - raspberry
+          - contabo
 
 jobs:
   deploy-traefik:
     uses: artur094/workflows/.github/workflows/docker-deploy.yml@main
     with:
-      LABELS: "['native', 'contabo', 'deploy']"
+      LABELS: "['native', '${{ github.event.inputs.destination }}', 'deploy']"
       DOCKER_COMPOSE_FILE: traefik/docker-compose.yml
       PROJECT_NAME: traefik
       ENVIRONMENT: production
