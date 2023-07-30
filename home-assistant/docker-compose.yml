@@ -18,7 +18,7 @@ services:
       - "traefik.http.services.home-assistant.loadbalancer.server.port=8123"
       - "traefik.http.routers.home-assistant.tls=true"
       - "traefik.http.routers.home-assistant.tls.certresolver=le"
-      - "traefik.http.routers.home-assistant.tls.domains[0].main=home-assistant.morandizzi.com"
+      - "traefik.http.routers.home-assistant.tls.domains[0].main=home-assistant.morandizzi.freeddns.org"
 
 networks: 
   default: 
