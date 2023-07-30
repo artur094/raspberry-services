@@ -12,7 +12,7 @@ services:
     labels:
       # Frontend
       - "traefik.enable=true"
-      - "traefik.http.routers.home-assistant.rule=Host(`home-assistant.morandizzi.com`)"
+      - "traefik.http.routers.home-assistant.rule=Host(`home-assistant.morandizzi.freeddns.org`)"
       - "traefik.http.routers.home-assistant.entrypoints=websecure"
       - "traefik.http.routers.home-assistant.service=home-assistant"
       - "traefik.http.services.home-assistant.loadbalancer.server.port=9000"
