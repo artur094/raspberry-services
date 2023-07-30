@@ -1,0 +1,15 @@
+name: Deploy Home Assistant Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-home-assistant:
+    uses: artur094/workflows/.github/workflows/docker-deploy.yml@main
+    with:
+      LABELS: "['native', 'raspberry', 'deploy']"
+      DOCKER_COMPOSE_FILE: home-assistant/docker-compose.yml
+      PROJECT_NAME: home-assistant
+      ENVIRONMENT: production
+      IMAGE_NAMES: "{}"
+    secrets: inherit

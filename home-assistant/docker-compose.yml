@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  home-assistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - TZ=Europe/Rome
+    volumes:
+      - /opt/homeassistant:/config
+    labels:
+      # Frontend
+      - "traefik.enable=true"
+      - "traefik.http.routers.home-assistant.rule=Host(`home-assistant.morandizzi.com`)"
+      - "traefik.http.routers.home-assistant.entrypoints=websecure"
+      - "traefik.http.routers.home-assistant.service=home-assistant"
+      - "traefik.http.services.home-assistant.loadbalancer.server.port=9000"
+      - "traefik.http.routers.home-assistant.tls=true"
+      - "traefik.http.routers.home-assistant.tls.certresolver=le"
+      - "traefik.http.routers.home-assistant.tls.domains[0].main=home-assistant.morandizzi.com"
+
+networks: 
+  default: 
+    external: 
+      name: traefik-network 
